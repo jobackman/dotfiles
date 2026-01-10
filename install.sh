@@ -23,11 +23,11 @@ info "Backup directory: $BACKUP_DIR"
 
 # Files to symlink (source -> target)
 declare -A FILES=(
-    ["bashrc"]="$HOME/.bashrc"
-    ["zshrc"]="$HOME/.zshrc" 
-    ["tmux.conf"]="$HOME/.tmux.conf"
-    ["gitconfig"]="$HOME/.gitconfig"
-    ["aliases"]="$HOME/.aliases"
+    ["shell/bashrc"]="$HOME/.bashrc"
+    ["shell/zshrc"]="$HOME/.zshrc"
+    ["shell/aliases"]="$HOME/.aliases"
+    ["git/gitconfig"]="$HOME/.gitconfig"
+    ["tmux/tmux.conf"]="$HOME/.tmux.conf"
     # Add more as needed
 )
 
