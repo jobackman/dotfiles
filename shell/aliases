@@ -1,0 +1,12 @@
+# pbcopy and pbpaste aliases for non-macOS systems
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    if ! command -v pbcopy &> /dev/null; then
+        if command -v xclip &> /dev/null; then
+            alias pbcopy='xclip -selection clipboard'
+            alias pbpaste='xclip -selection clipboard -o'
+        elif command -v xsel &> /dev/null; then
+            alias pbcopy='xsel --clipboard --input'
+            alias pbpaste='xsel --clipboard --output'
+        fi
+    fi
+fi
