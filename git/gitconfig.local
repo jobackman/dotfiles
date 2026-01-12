@@ -1,0 +1,8 @@
+# Create a local .gitconfig.local file for machine specific settings
+# For example, to enable GPG signing of commits and set credential helper:
+
+# Put machine specific settings in .gitconfig.local, e.g.
+[credential]
+    helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe
+[commit]
+    gpgSign = true

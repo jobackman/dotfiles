@@ -1,9 +1,26 @@
-[core]
-    excludesfile = ~/.gitignore_global
-    editor = code --wait
 [user]
     name = Johan Bäckman
     email = johan.c.backman@gmail.com
+[core]
+    excludesfile = ~/.gitignore_global
+    editor = code --wait
+    pager = delta
+[sequence]
+    editor = code --wait
 
-[init]
-	defaultBranch = main
+[delta]
+    feature = side-by-side
+    line-numbers = true
+    hunk-header-style = omit
+    navigate = true
+    dark = true
+
+
+[include]
+	path = ~/.gitconfig.local
+
+# Put machine specific settings in .gitconfig.local, e.g.
+# [credential]
+#     helper = '/mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe'
+# [commit]
+#     gpgSign = true
