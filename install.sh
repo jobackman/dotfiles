@@ -28,22 +28,20 @@ declare -A FILES=(
     ["shell/aliases"]="$HOME/.aliases"
     ["git/gitconfig"]="$HOME/.gitconfig"
     ["tmux/tmux.conf"]="$HOME/.tmux.conf"
-    # Add more as needed
 )
 
 for source in "${!FILES[@]}"; do
     target="${FILES[$source]}"
     source_path="$DOTFILES_DIR/$source"
-    
+
     # Backup existing file if not already a symlink
     if [[ -f "$target" && ! -L "$target" ]]; then
         warn "Backing up $target"
         cp "$target" "$BACKUP_DIR/"
     fi
-    
-    # Create symlink
+
     info "Linking $source_path -> $target"
     ln -sf "$source_path" "$target"
 done
 
-info "Installation complete! Restart your shell or run 'source ~/.bashrc'"
+info "Installation complete!'"

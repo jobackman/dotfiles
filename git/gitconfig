@@ -10,11 +10,11 @@
 
 [delta]
     feature = side-by-side
+    side-by-side = true
     line-numbers = true
     hunk-header-style = omit
     navigate = true
     dark = true
-
 
 [include]
 	path = ~/.gitconfig.local
