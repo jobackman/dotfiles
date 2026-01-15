@@ -15,9 +15,13 @@ plugins=(
 
 # --- User configuration ---
 
+export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt APPEND_HISTORY
 setopt autocd
 autoload -U compinit; compinit
 
