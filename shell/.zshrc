@@ -41,8 +41,10 @@ PATH=$PATH:./node_modules/.bin
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# wsl utilities
-export BROWSER=wslview
+# --- WSL ---
+if [[ -n "$WSL_DISTRO_NAME" ]]; then
+  export BROWSER=wslview
+fi
 
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
