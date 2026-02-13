@@ -27,14 +27,15 @@ autoload -U compinit; compinit
 
 # alias
 source ~/.aliases
+
 # load environment variables
 source ~/.env.keys
 
-PATH=$PATH:/home/johan/.local/bin
+PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:./node_modules/.bin
 
 # bun completions
-[ -s "/home/johan/.bun/_bun" ] && source "/home/johan/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -44,19 +45,16 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export BROWSER=wslview
 
 # fnm
-FNM_PATH="/home/johan/.local/share/fnm"
+FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/johan/.local/share/fnm:$PATH"
+  export PATH="$FNM_PATH:$PATH"
   eval "`fnm env`"
 fi
 
 eval "$(fnm env --use-on-cd --shell zsh)"
 
 # opencode
-export PATH=/home/johan/.opencode/bin:$PATH
-
-# Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="$HOME/.opencode/bin:$PATH"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
