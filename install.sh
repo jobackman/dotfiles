@@ -1,47 +1,33 @@
 #!/bin/bash
 
-# Simple dotfiles installer
+# Dotfiles installer using GNU Stow
 # Usage: ./install.sh
 
 set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 NC='\033[0m'
 
 info() { echo -e "${GREEN}[INFO]${NC} $1"; }
-warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
-# Create backup directory
-mkdir -p "$BACKUP_DIR"
-info "Backup directory: $BACKUP_DIR"
+if ! command -v stow &>/dev/null; then
+    echo -e "${RED}[ERROR]${NC} GNU Stow is not installed. Install it first:"
+    echo "  Ubuntu/Debian: sudo apt install stow"
+    echo "  macOS:         brew install stow"
+    exit 1
+fi
 
-# Files to symlink (source -> target)
-declare -A FILES=(
-    ["shell/bashrc"]="$HOME/.bashrc"
-    ["shell/zshrc"]="$HOME/.zshrc"
-    ["shell/aliases"]="$HOME/.aliases"
-    ["git/gitconfig"]="$HOME/.gitconfig"
-    ["tmux/tmux.conf"]="$HOME/.tmux.conf"
-)
+PACKAGES=(shell git tmux)
 
-for source in "${!FILES[@]}"; do
-    target="${FILES[$source]}"
-    source_path="$DOTFILES_DIR/$source"
+cd "$DOTFILES_DIR"
 
-    # Backup existing file if not already a symlink
-    if [[ -f "$target" && ! -L "$target" ]]; then
-        warn "Backing up $target"
-        cp "$target" "$BACKUP_DIR/"
-    fi
-
-    info "Linking $source_path -> $target"
-    ln -sf "$source_path" "$target"
+for pkg in "${PACKAGES[@]}"; do
+    info "Stowing $pkg"
+    stow -v --target="$HOME" "$pkg"
 done
 
-info "Installation complete!'"
+info "Installation complete!"
