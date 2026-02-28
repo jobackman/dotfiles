@@ -478,3 +478,6 @@ for old_alias new_alias (
     $new_alias"
 done
 unset old_alias new_alias
+
+# beads-rust
+unalias br 2>/dev/null  # br installer - remove conflicting alias
